@@ -1,0 +1,9 @@
+Package: VVnA
+Title: VVnA Simulations
+Version: 0.1
+Authors: "Aous Abdo <aabdo.unc@ida.org> [aut, cre]"
+Maintainer: "Aous Abdo <aabdo.unc@ida.org> [aut, cre]"
+Description: What the package does (paragraph)
+Depends: R (>= 3.0.3)
+License: MIT
+LazyData: true
