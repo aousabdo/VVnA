@@ -1,41 +1,40 @@
-b <- 0.1
-m <- 0.1
-t <- seq(0,5,0.5)
-Vx0 <- 11
-
-disp_vel <-  function(Vx0=10, t=10, b=0.1, m=0.1){
-        #' Function to calculate displaement and velocity of a projectile when air friction is introduced
-        X <- Vx0*m/b*(1-exp(-t*b/m))
-        Vx <- Vx0*exp(-t*b/m)
-        return(c(X, Vx))
-}
-
-Vx <- array(data = NA, dim=length(t))
-X <- array(data = NA, dim=length(t))
-for (i in 1:length(t)){
-        X[i]  <- disp_vel(t=t[i])[1]
-        Vx[i] <- disp_vel(t=t[i])[2]
-}
-        
-plot(t, Vx, col="blue", type="o", ylim=c(0, max(Vx,X)))
-points(t,X, col="red")
-lines(t,X, col="red")
-
-
-#' Find column name corresponding to a particular functional
-#'
-#' The original data set contains very long column headers. This function
-#' does a keyword search over the headers to find those column headers that
-#' match a particular keyword, e.g., mean, median, etc.
-#' @param x The data we are querying (data.frame)
-#' @param v The keyword we are searching for (character)
-#' @param ignorecase Should case be ignored (logical)
-#' @return A vector of column names matching the keyword
+#' Function to calculate displaement and velocity of a projectile in vacuum 
+#' 
+#' This function takes in the initial velocity, time of flight, 
+#' and returns the distance travlled and speed at a given time t
+#' @param v0 initial velocity in m/s
+#' @param y0 initial height in m
+#' @param theta0 initial angle in degrees
+#' @param t Time of flight in seconds
+#' @return x_t Displacement in the horizontal direction as a function of time (in meters)
+#' @return vx_t speed in the horizontal direction as a function of time (in m/s units)
+#' @return y_t Displacement in the vertical direction as a function of time (in meters)
+#' @return vy_t speed in the vertical direction as a function of time (in m/s units)
+#' @return y_x Displacement in the vertical direction as a function of horizontal displacement (in meters)
 #' @export
-findvar <- function(x,v, ignorecase=TRUE) {
-        if(!is.character(v)) stop('name must be character')
-        if(!is.data.frame(x)) stop('x must be a data.frame')
-        v <- grep(v,names(x),value=T, ignore.case=ignorecase)
-        if(length(v)==0) v <- NA
-        return(v)
+Projectile <-  function(y0, v0, theta0, t){
+        if(!is.numeric(y0)) stop('y0 must be numeric')
+        if(!is.numeric(v0)) stop('v0 must be numeric')
+        if(!is.numeric(theta0)) stop('theta0 must be numeric')
+        if(!is.numeric(t)) stop('t must be numeric')
+        
+        ## calculate horizontal and vertical components of the initial velocity
+        vx0 <- v0*cos(theta0*pi/180)
+        vy0 <- v0*sin(theta0*pi/180)    
+    
+        ## acceleration of gravity
+        g <- 9.8
+        
+        ## calculate displacement and velocity in the horizontal direction as a function of time
+        x_t  <- vx0*t
+        vx_t <- vx0 
+        
+        ## calculate displacement and velocity in the vertical direction as a function of time
+        y_t  <- y0 + vy0*t - 0.5*g*t^2
+        vy_t <- vy0 - g*t
+                
+        ## calculate vertical distance as a function of horizontal displacement
+        y_x <- tan(theta0*pi/180)*x_t -(g/(2*vx0^2)*x_t^2)
+        
+        return(c(x_t, vx_t, y_t, vy_t, y_x))
 }
