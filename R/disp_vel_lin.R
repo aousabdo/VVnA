@@ -10,7 +10,12 @@
 #' @return X Displacement in the horizontal direction
 #' @return Vx speed in the horizontal direction at a given time t
 #' @export
-disp_vel_lin <-  function(Vx0=10, t=10, b=0.1, m=0.1){
+disp_vel_lin <-  function(Vx0, t, b, m){
+        if(!is.numeric(Vx0)) stop('Vx0 must be numeric')
+        if(!is.numeric(t)) stop('t must be numeric')
+        if(!is.numeric(b)) stop('b must be numeric')
+        if(!is.numeric(m)) stop('m must be numeric')
+        
         X <- Vx0*m/b*(1-exp(-t*b/m))
         Vx <- Vx0*exp(-t*b/m)
         return(c(X, Vx))
