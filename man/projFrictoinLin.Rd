@@ -35,4 +35,39 @@ This function takes in the initial velocity, time of flight,
 drag coefficient, and mass of object and returns the distance
 travlled and speed at a given time t
 }
+\examples{
+projFrictoinLin(y0 = 10, v0 = 50, theta0 = 30, t = 12, b = 0.5, m = 5)
+
+ ## Example of how to call both projectile functions
+ ## and make a projectile path plot
+ t      <- seq(0,5,0.1)
+ v0     <- 50
+ theta0 <- 30
+ b      <- 0.9
+ m      <- 5
+ x_t  <- vector(mode="numeric", length=length(t))
+ y_t  <- vector(mode="numeric", length=length(t))
+ xf_t <- vector(mode="numeric", length=length(t))
+ yf_t <- vector(mode="numeric", length=length(t))
+ for (i in 1:length(t)){
+        x_t[i]  <- Projectile(y0 = 10, v0 = v0,
+        theta0 = theta0, t = t[i])[1]
+        y_t[i]  <- Projectile(y0 = 10, v0 = v0,
+        theta0 = theta0, t = t[i])[5]
+        xf_t[i] <- projFrictoinLin(y0 = 10, v0 = v0,
+        theta0 = theta0, t = t[i], b = b, m = m)[1]
+        yf_t[i] <- projFrictoinLin(y0 = 10, v0 = v0,
+        theta0 = theta0, t = t[i], b = b, m = m)[5]
+}
+
+plot(x_t, y_t, col="blue", pch=19, ylim=c(min(y_t, yf_t), max(y_t, yf_t)),
+     xlab = "Horizontal Distance Travelled (m)",
+     ylab = "Vertical Distance Travelled (m)")
+points(xf_t, yf_t, col="red", pch=22)
+legend(x="topleft", legend = c("No Friction", "Friction"),
+    col = c("blue", "red"), pch = c(19, 22))
+}
+\author{
+Aous Abdo
+}
 
