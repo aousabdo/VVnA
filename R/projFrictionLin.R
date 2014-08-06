@@ -1,4 +1,4 @@
-#' Function to calculate displaement and velocity of a projectile when air friction is introduced
+#' Function to calculate displacement and velocity of a projectile when air friction is introduced.
 #' This function only treats the linear case of velocity dependence. 
 #' 
 #' This function takes in the initial velocity, time of flight, 
@@ -16,7 +16,7 @@
 #' @return vy_t speed in the vertical direction as a function of time (in m/s units)
 #' @return y_x Displacement in the vertical direction as a function of horizontal displacement (in meters)
 #' @export
-disp_vel_lin <-  function(y0, v0, theta0, t, b, m){
+projFrictoinLin <-  function(y0, v0, theta0, t, b, m){
         if(!is.numeric(y0)) stop('y0 must be numeric')
         if(!is.numeric(v0)) stop('v0 must be numeric')
         if(!is.numeric(theta0)) stop('theta0 must be numeric')
