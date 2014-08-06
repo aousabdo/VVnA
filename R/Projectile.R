@@ -34,7 +34,7 @@ Projectile <-  function(y0, v0, theta0, t){
         vy_t <- vy0 - g*t
                 
         ## calculate vertical distance as a function of horizontal displacement
-        y_x <- tan(theta0*pi/180)*x_t -(g/(2*vx0^2)*x_t^2)
+        y_x <- y0 + tan(theta0*pi/180)*x_t -(g/(2*vx0^2)*x_t^2)
         
         return(c(x_t, vx_t, y_t, vy_t, y_x))
 }
