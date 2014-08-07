@@ -3,7 +3,7 @@
 \alias{Projectile}
 \title{Function to calculate displaement and velocity of a projectile in vacuum}
 \usage{
-Projectile(y0, v0, theta0, t)
+Projectile(t, y0, v0, theta0)
 }
 \arguments{
 \item{v0}{initial velocity in m/s}
@@ -15,13 +15,13 @@ Projectile(y0, v0, theta0, t)
 \item{t}{Time of flight in seconds}
 }
 \value{
-x_t Displacement in the horizontal direction as a function of time (in meters)
+x Displacement in the horizontal direction as a function of time (in meters)
 
-vx_t speed in the horizontal direction as a function of time (in m/s units)
+vx speed in the horizontal direction as a function of time (in m/s units)
 
-y_t Displacement in the vertical direction as a function of time (in meters)
+y Displacement in the vertical direction as a function of time (in meters)
 
-vy_t speed in the vertical direction as a function of time (in m/s units)
+vy speed in the vertical direction as a function of time (in m/s units)
 
 y_x Displacement in the vertical direction as a function of horizontal displacement (in meters)
 }

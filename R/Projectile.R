@@ -6,13 +6,13 @@
 #' @param y0 initial height in m
 #' @param theta0 initial angle in degrees
 #' @param t Time of flight in seconds
-#' @return x_t Displacement in the horizontal direction as a function of time (in meters)
-#' @return vx_t speed in the horizontal direction as a function of time (in m/s units)
-#' @return y_t Displacement in the vertical direction as a function of time (in meters)
-#' @return vy_t speed in the vertical direction as a function of time (in m/s units)
+#' @return x Displacement in the horizontal direction as a function of time (in meters)
+#' @return vx speed in the horizontal direction as a function of time (in m/s units)
+#' @return y Displacement in the vertical direction as a function of time (in meters)
+#' @return vy speed in the vertical direction as a function of time (in m/s units)
 #' @return y_x Displacement in the vertical direction as a function of horizontal displacement (in meters)
 #' @export
-Projectile <-  function(y0, v0, theta0, t){
+Projectile <-  function(t, y0, v0, theta0){
         if(!is.numeric(y0)) stop('y0 must be numeric')
         if(!is.numeric(v0)) stop('v0 must be numeric')
         if(!is.numeric(theta0)) stop('theta0 must be numeric')
@@ -26,15 +26,17 @@ Projectile <-  function(y0, v0, theta0, t){
         g <- 9.8
         
         ## calculate displacement and velocity in the horizontal direction as a function of time
-        x_t  <- vx0*t
-        vx_t <- vx0 
+        x  <- vx0*t
+        vx <- vx0 
         
         ## calculate displacement and velocity in the vertical direction as a function of time
-        y_t  <- y0 + vy0*t - 0.5*g*t^2
-        vy_t <- vy0 - g*t
+        y  <- y0 + vy0*t - 0.5*g*t^2
+        vy <- vy0 - g*t
                 
         ## calculate vertical distance as a function of horizontal displacement
-        y_x <- y0 + tan(theta0*pi/180)*x_t -(g/(2*vx0^2)*x_t^2)
+        y_x <- y0 + tan(theta0*pi/180)*x -(g/(2*vx0^2)*x^2)
         
-        return(c(x_t, vx_t, y_t, vy_t, y_x))
+        ret = list(x = x, vx = vx, y = y, vy = vy, y_x = y_x)
+        
+        return(ret)
 }
