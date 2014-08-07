@@ -63,9 +63,9 @@ projFrictoinLin(y0 = 10, v0 = 50, theta0 = 30, t = 12, b = 0.5, m = 5)
 plot(x_t, y_t, col="blue", pch=19, ylim=c(min(y_t, yf_t), max(y_t, yf_t)),
      xlab = "Horizontal Distance Travelled (m)",
      ylab = "Vertical Distance Travelled (m)")
-points(xf_t, yf_t, col="red", pch=22)
+points(xf_t, yf_t, col="red", pch=21)
 legend(x="topleft", legend = c("No Friction", "Friction"),
-    col = c("blue", "red"), pch = c(19, 22))
+    col = c("blue", "red"), pch = c(19, 21))
 }
 \author{
 Aous Abdo
