@@ -14,6 +14,6 @@
 jit <- function(x, n, amount=NULL){
         if(!is.numeric(x)) stop('x must be numeric')
         if(!is.numeric(n)) stop('n must be numeric')
-        if(!is.numeric(amount)) stop('amount must be numeric')
+        if(!is.null(amount)){if(!is.numeric(amount)) stop('amount must be numeric')}
         jitter(rep(x, n), amount = amount)
 }
