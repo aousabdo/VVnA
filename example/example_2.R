@@ -15,3 +15,4 @@ example_2 <- function(t = seq(0,5,0.1), v0 = 50, theta0 = 30, b = 0.9,  m = 5){
         legend(x="topleft", legend = c("No Friction", "Friction"),
                col = c("blue", "red"), pch = c(19, 21))
 }
+
