@@ -5,8 +5,20 @@
 \usage{
 jit(x, n, amount = NULL)
 }
+\arguments{
+\item{x}{a numerical Vector}
+
+\item{n}{an integer representing how many times to repeat the jittering
+for each entry in x. If n is a non-integer numeric, it will coerced
+into an integer}
+
+\item{amount}{same as in \link{jitter}}
+}
 \description{
 simple function to jitter a vector by the specified amount
 after repeating it n numbers
+}
+\examples{
+jit(1:5, 2, 3)
 }
 
