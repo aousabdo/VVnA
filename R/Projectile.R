@@ -1,3 +1,5 @@
+#' Projectile
+#' 
 #' Function to calculate displaement and velocity of a projectile in vacuum 
 #' 
 #' This function takes in the initial velocity, time of flight, 

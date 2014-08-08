@@ -1,3 +1,5 @@
+#' projFrictoinLin
+#' 
 #' Function to calculate displacement and velocity of a projectile when air friction is introduced.
 #' This function only treats the linear case of velocity dependence. 
 #' 
