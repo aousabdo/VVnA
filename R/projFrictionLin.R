@@ -42,6 +42,7 @@
 #' points(xf, yf, col="red", pch=21)
 #' legend(x="topleft", legend = c("No Friction", "Friction"), 
 #'     col = c("blue", "red"), pch = c(19, 21))
+#' 
 #' @export
 projFrictoinLin <-  function(t, y0, v0, theta0, b, m){
         if(!is.numeric(y0)) stop('y0 must be numeric')
