@@ -65,7 +65,7 @@ projFrictoinLin <-  function(t, y0, v0, theta0, b, m){
 
         ## calculate displacement and velocity in the vertical direction as a function of time
         y  <- y0 - vter*t + tau*(vy0 + vter)*(1-exp(-t/tau))
-        vy <- vy0*exp(-t/tau) + vter*(1-exp(-t/tau))
+        vy <- vy0*exp(-t/tau) - vter*(1-exp(-t/tau))
         
         ## calculate vertical distance as a function of horizontal displacement
         y_x <- y0 + ((vy0 + vter)/vx0) * x + vter*tau*log(1-(x/(vx0*tau)))
