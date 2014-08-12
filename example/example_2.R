@@ -16,8 +16,10 @@ Sim <- function(t = seq(0,5,0.1), y0 = 0, v0 = 50, theta0 = 30, b = 0.5, m = 5,
                 n = 5, amount=1, seed=NULL){
         #function to simulate projectile motion
         set.seed(seed)
-        df <- data.frame(y0=jit(y0,n, amount), v0=jit(v0,n, amount), 
-                         theta0=jit(theta0,n, amount),b = jit(b,n, amount),
+        df <- data.frame(y0=jit(y0,n, amount), 
+                         v0=jit(v0,n, amount), 
+                         theta0=jit(theta0,n, amount),
+                         b = jit(b,n, amount),
                          m=jit(m,n, amount))       
         ## List of projectile data for MC runs
         MC <- list()     
