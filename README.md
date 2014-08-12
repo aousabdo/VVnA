@@ -11,3 +11,6 @@ motion:
 * Projectile: A function to calculate projectile parameters in vacuum. 
 * projFrictionLin: A function to calculate projectile parameters when friction 
 is presented. This function only treats the linear case of velocity dependence. 
+
+#### Examples
+Examples can be found under the example directory
