@@ -1,4 +1,4 @@
-#' Projectile
+#' projectile
 #' 
 #' Function to calculate displaement and velocity of a projectile in vacuum 
 #' 
@@ -14,7 +14,7 @@
 #' @return vy speed in the vertical direction as a function of time (in m/s units)
 #' @return y_x Displacement in the vertical direction as a function of horizontal displacement (in meters)
 #' @export
-Projectile <-  function(t, y0, v0, theta0){
+projectile <-  function(t, y0, v0, theta0){
         if(!is.numeric(y0)) stop('y0 must be numeric')
         if(!is.numeric(v0)) stop('v0 must be numeric')
         if(!is.numeric(theta0)) stop('theta0 must be numeric')

@@ -44,7 +44,7 @@ projFrictoinLin(t = seq(1,5,0.1), y0 = 10, v0 = 50, theta0 = 30, b = 0.5, m = 5)
 ## Example of how to call both projectile functions
 ## and make a projectile path plot
 
-vacuum   <- Projectile(t = seq(0,5,0.1), y0 = 10, v0 = 50, theta0 = 30)
+vacuum   <- projectile(t = seq(0,5,0.1), y0 = 10, v0 = 50, theta0 = 30)
 friction <- projFrictoinLin(t = seq(0,5,0.1), y0 = 10, v0 = 50, theta0 = 30, b = 0.5, m = 5)
 
 x  <- vacuum$x; y  <- vacuum$y; xf <- friction$x; yf <- friction$y_x
@@ -60,6 +60,6 @@ legend(x="topleft", legend = c("No Friction", "Friction"),
 Aous Abdo
 }
 \seealso{
-\code{\link{Projectile}}
+\code{\link{projectile}}
 }
 

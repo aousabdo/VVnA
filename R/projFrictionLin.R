@@ -19,7 +19,7 @@
 #' @return vy speed in the vertical direction as a function of time (in m/s units)
 #' @return y_x Displacement in the vertical direction as a function of horizontal displacement (in meters)
 #' 
-#' @seealso \code{\link{Projectile}}
+#' @seealso \code{\link{projectile}}
 #' 
 #' @examples
 #' 
@@ -28,7 +28,7 @@
 #' ## Example of how to call both projectile functions
 #' ## and make a projectile path plot 
 #' 
-#' vacuum   <- Projectile(t = seq(0,5,0.1), y0 = 10, v0 = 50, theta0 = 30) 
+#' vacuum   <- projectile(t = seq(0,5,0.1), y0 = 10, v0 = 50, theta0 = 30) 
 #' friction <- projFrictoinLin(t = seq(0,5,0.1), y0 = 10, v0 = 50, theta0 = 30, b = 0.5, m = 5) 
 #' 
 #' x  <- vacuum$x; y  <- vacuum$y; xf <- friction$x; yf <- friction$y_x
