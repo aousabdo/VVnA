@@ -3,7 +3,7 @@
 \alias{jit}
 \title{jit}
 \usage{
-jit(x, n, amount = NULL)
+jit(x, n, amount = NULL, method = "norm")
 }
 \arguments{
 \item{x}{a numerical Vector}
@@ -12,13 +12,17 @@ jit(x, n, amount = NULL)
 for each entry in x. If n is a non-integer numeric, it will coerced
 into an integer}
 
-\item{amount}{same as in \link{jitter}}
+\item{amount}{same as in \link{jitter} when using unifrom values
+and is equal to the standard deviation when using normal values}
+
+\item{method}{randomizing method: "norm" or "uniform"}
 }
 \description{
 simple function to jitter a vector by the specified amount
 after repeating it n numbers
 }
 \examples{
-jit(1:5, 2, 3)
+jit(x = 40, n = 10, method = "norm", amount=3)
+jit(x=10, n=5, method="uniform")
 }
 
