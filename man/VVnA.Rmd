@@ -51,6 +51,7 @@ projectile parameters for those arguments. For example for an initial velocity `
 `30 m/s`, initial height `y` of `0 m`, initial projectile angle `theta0` of `30 degrees`, and 
 at time `t=3 seconds` we get:
 
+
 ```{r}
 projectile(t = 3, y0 = 0, v0 = 30, theta0 = 30)
 ```
@@ -61,4 +62,14 @@ most useful for the time parameter `t`:
 ```{r}
 vacuum <- projectile(t = seq(0,5,0.1), y0 = 0, v0 = 50, theta0 = 30)
 plot(vacuum$x, vacuum$y, pch=19, col="blue")
+```
+
+```{r}
+t <- seq(0,5,0.1)
+vacuum <- projectile(t = t, y0 = 0, v0 = 50, theta0 = 30)
+## prepare grid
+par(mfcol=c(2,2), mar = c(3.5,3,1,1), oma=c(2,2,2,2), mgp=c(2.2,1,0))
+plot(t, vacuum$x, pch=19, col="blue")
+points(t, rep(vacuum$vx, length(t)), pch=19, col="blue")
+points(t, vacuum$y, pch=19, col="blue")
 ```
