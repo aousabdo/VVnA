@@ -6,9 +6,11 @@ opset: pdf
 output:
   pdf_document:
     toc: TRUE
+    toc_depth: 3
+    number_sections: true
   knitrBootstrap::bootstrap_document:
     title: "VVnA R Package"
-    theme: Simplex
+    theme: United
     highlight: Solarized - Light
     theme.chooser: FALSE
     highlight.chooser: FALSE
@@ -30,21 +32,21 @@ velocity `v`. The Inertial drag realted to the square of the velocity is not tre
 
 In each of these two cases, a function will return the following projectile parameters:  
 
-1. `x`: Displacement in the horizontal direction as a function of time (in meters)  
-2. `vx`: Speed in the horizontal direction as a function of time (in m/s units)  
-3. `y`: Displacement in the vertical direction as a function of time (in meters)  
-4. `vy`: Speed in the vertical direction as a function of time (in m/s units)  
-5. `y_x`: Displacement in the vertical direction as a function of horizontal displacement (in meters)  
+1. `x`: Displacement in the horizontal direction as a function of time (in meters) 
+2. `vx`: Speed in the horizontal direction as a function of time (in m/s units) 
+3. `y`: Displacement in the vertical direction as a function of time (in meters) 
+4. `vy`: Speed in the vertical direction as a function of time (in m/s units) 
+5. `y_x`: Displacement in the vertical direction as a function of horizontal displacement (in meters) 
 
 In all cases, it is assumed that there are no motion in the lateral direction.
 
 ### Projectile Motion in Vaccum  
 Arguments of the `projectile` function are:  
 
-1. `v0`: Initial velocity in m/s  
-2. `y0`: Initial height in m  
-3. `theta0`: Initial angle in degrees  
-4. `t`: Time of flight in seconds  
+1. `v0`: Initial velocity in m/s 
+2. `y0`: Initial height in m 
+3. `theta0`: Initial angle in degrees 
+4. `t`: Time of flight in seconds 
 
 For vectors of length `1` for all arguments, the function will return a list of
 projectile parameters for those arguments. For example for an initial velocity `v` of
@@ -61,15 +63,86 @@ most useful for the time parameter `t`:
 
 ```{r}
 vacuum <- projectile(t = seq(0,5,0.1), y0 = 0, v0 = 50, theta0 = 30)
-plot(vacuum$x, vacuum$y, pch=19, col="blue")
+plot(vacuum$x, vacuum$y, pch=19, col="blue", main="Projectile motion in vacuum")
 ```
+
 
 ```{r}
 t <- seq(0,5,0.1)
 vacuum <- projectile(t = t, y0 = 0, v0 = 50, theta0 = 30)
 ## prepare grid
 par(mfcol=c(2,2), mar = c(3.5,3,1,1), oma=c(2,2,2,2), mgp=c(2.2,1,0))
+## plot outputs
 plot(t, vacuum$x, pch=19, col="blue")
-points(t, rep(vacuum$vx, length(t)), pch=19, col="blue")
-points(t, vacuum$y, pch=19, col="blue")
+plot(t, rep(vacuum$vx, length(t)), pch=19, col="blue")
+plot(t, vacuum$y, pch=19, col="red")
+plot(t, vacuum$vy, pch=19, col="red")
+title("Projectile motion in vacuum", outer=TRUE)
 ```
+
+
+### Projectile Motion in Air  
+Arguments of the `projFrictionLin` function are:  
+
+1. `v0`: Initial velocity in m/s 
+2. `y0`: Initial height in m 
+3. `theta0`: Initial angle in degrees 
+4. `t`: Time of flight in seconds
+5. `b`: drag coefficient in Newtons.seconds/meters
+6. `m` mass of object in kg
+
+For vectors of length `1` for all arguments, the function will return a list of
+projectile parameters for those arguments. For example for an initial velocity `v` of
+`30 m/s`, initial height `y` of `0 m`, initial projectile angle `theta0` of `30 degrees`, 
+drag coeffiecient `b` of 0.5, mass of projectile `m` of 5 kg,  and 
+at time `t=3 seconds` we get:
+
+
+```{r}
+projFrictoinLin(t = 3, y0 = 0, v0 = 30, theta0 = 30, b = 0.5, m = 5)
+```
+
+One can also pass a vector of length `> 1` for any individual input parameter. This is 
+most useful for the time parameter `t`:
+
+```{r}
+friction <- projFrictoinLin(t = seq(0,5,0.1), y0 = 0, v0 = 50, theta0 = 30, b = 0.5, m = 5)
+plot(friction$x, friction$y, pch=19, col="blue", main="Projectile motion in Air")
+```
+
+
+```{r}
+t <- seq(0,5,0.1)
+friction <- projFrictoinLin(t = t, y0 = 0, v0 = 50, theta0 = 30, b = 0.5, m = 5)
+## prepare grid
+par(mfcol=c(2,2), mar = c(3.5,3,1,1), oma=c(2,2,2,2), mgp=c(2.2,1,0))
+## plot outputs
+plot(t, friction$x, pch=19, col="blue")
+plot(t, friction$vx, pch=19, col="blue")
+plot(t, friction$y, pch=19, col="red")
+plot(t, friction$vy, pch=19, col="red")
+title("Projectile motion in Air", outer=TRUE)
+```
+
+
+### Comparing Projectile Motion   
+
+In the example below we compare projectile motion in vacuum to that in air:  
+
+
+```{r}
+par(mfcol=c(1,1))
+vacuum   <- projectile(t = seq(0,5,0.1), y0 = 10, v0 = 50, theta0 = 30)
+friction <- projFrictoinLin(t = seq(0,5,0.1), y0 = 10, v0 = 50, theta0 = 30, b = 0.5, m = 5)
+
+x  <- vacuum$x; y  <- vacuum$y; xf <- friction$x; yf <- friction$y_x
+
+plot(x, y, col="blue", pch=19, ylim=c(min(y, yf), max(y, yf)),
+     xlab = "Horizontal Distance Travelled (m)",
+     ylab = "Vertical Distance Travelled (m)")
+points(xf, yf, col="red", pch=21)
+legend(x="topleft", legend = c("No Friction", "Friction"),
+    col = c("blue", "red"), pch = c(19, 21))
+```
+
+## The jit Function
