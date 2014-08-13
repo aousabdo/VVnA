@@ -1,14 +1,23 @@
 ---
-title: "VVnA"
+title: "VVnA R Package"
 author: "Aous Abdo"
 date: "Tuesday, August 12, 2014"
+opset: pdf
 output:
-  html_document:
-    keep_md: yes
-    number_sections: yes
-    theme: readable
-    toc: yes
+  pdf_document:
+    toc: TRUE
+  knitrBootstrap::bootstrap_document:
+    title: "VVnA R Package"
+    theme: Simplex
+    highlight: Solarized - Light
+    theme.chooser: FALSE
+    highlight.chooser: FALSE
+    menu: TRUE
 ---
+```{r echo=FALSE}
+library(knitr)
+library(VVnA)
+```
 # Introduction
  
 The VVnA "Validation, Verification, and Accreditation" package is a package intended 
@@ -16,7 +25,40 @@ for ....
 
 # Functions
 ## Projectile Motion
-Projectile motion in vacuum and in air are calculated with the `Projectile` and `projFrictionLin` functions respectively. when considering air friction effects on projectiles, we only consider the viscous drag which is related to the 
+Projectile motion in vacuum and in air are calculated with the `projectile` and `projFrictionLin` functions respectively. when considering air friction effects on projectiles, we only consider the viscous drag which is related to the 
 velocity `v`. The Inertial drag realted to the square of the velocity is not treated in this package. 
 
-### Projectile Motion in Vaccum
+In each of these two cases, a function will return the following projectile parameters:  
+
+1. `x`: Displacement in the horizontal direction as a function of time (in meters)  
+2. `vx`: Speed in the horizontal direction as a function of time (in m/s units)  
+3. `y`: Displacement in the vertical direction as a function of time (in meters)  
+4. `vy`: Speed in the vertical direction as a function of time (in m/s units)  
+5. `y_x`: Displacement in the vertical direction as a function of horizontal displacement (in meters)  
+
+In all cases, it is assumed that there are no motion in the lateral direction.
+
+### Projectile Motion in Vaccum  
+Arguments of the `projectile` function are:  
+
+1. `v0`: Initial velocity in m/s  
+2. `y0`: Initial height in m  
+3. `theta0`: Initial angle in degrees  
+4. `t`: Time of flight in seconds  
+
+For vectors of length `1` for all arguments, the function will return a list of
+projectile parameters for those arguments. For example for an initial velocity `v` of
+`30 m/s`, initial height `y` of `0 m`, initial projectile angle `theta0` of `30 degrees`, and 
+at time `t=3 seconds` we get:
+
+```{r}
+projectile(t = 3, y0 = 0, v0 = 30, theta0 = 30)
+```
+
+One can also pass a vector of length `> 1` for any individual input parameter. This is 
+most useful for the time parameter `t`:
+
+```{r}
+vacuum <- projectile(t = seq(0,5,0.1), y0 = 0, v0 = 50, theta0 = 30)
+plot(vacuum$x, vacuum$y, pch=19, col="blue")
+```
