@@ -2,23 +2,16 @@
 title: "VVnA R Package"
 author: "Aous Abdo"
 date: "Tuesday, August 12, 2014"
-opset: pdf
 output:
   pdf_document:
     toc: TRUE
     toc_depth: 3
     number_sections: true
-  knitrBootstrap::bootstrap_document:
-    title: "VVnA R Package"
-    theme: United
-    highlight: Solarized - Light
-    theme.chooser: FALSE
-    highlight.chooser: FALSE
-    menu: TRUE
 ---
-```{r echo=FALSE}
+```{r, echo=FALSE,  warning=FALSE}
 library(knitr)
 library(VVnA)
+opts_chunk$set(eval=TRUE, tidy=TRUE, tidy.opts=list(width.cutoff=10))
 ```
 # Introduction
  
@@ -146,3 +139,29 @@ legend(x="topleft", legend = c("No Friction", "Friction"),
 ```
 
 ## The jit Function
+The `jit` function is used to randmoize a given vector. It has two modes, `norm` and `uniform`:  
+
+*`norm`: randomizes a numerical vector by drawing samples from a noraml distribution.
+*`uniform`: randomizes a numerical vector by drawing samples from a uniform distribution.  
+
+In the example below we randomize the number `40`, `5` times by drawing from a normal distribution 
+with mean equal to the value to be ranomized, `40`, and a standard deviation equal to 3, passed to 
+the `mean` argument:
+
+```{r}
+jit(x = 40, n = 5, method = "norm", amount=3)
+```
+
+The example below does a similar ranomization, jittering, but with a uniform distribution:
+
+```{r}
+jit(x=40, n=5, method="uniform")
+```
+
+Please notice that the `jit` function with the `uniform` method is essentially equivalent to the `jitter` function in R. 
+
+```{r, tidy.opts=list(width.cutoff=10)}
+par(mfrow=c(2,1), mar = c(3.5,3,1,1), oma=c(2,2,2,2), mgp=c(2.2,1,0))
+hist(jit(x=1, n=1000, method="norm", amount = 1), main="Normal Dist.", xlab="Randomized Values", col="lightblue")
+hist(jit(x=1, n=1000, method="uniform", amount = 1), main="Uniform Dist.", xlab="Randomized Values", col="lightblue")
+```
