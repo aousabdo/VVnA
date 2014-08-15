@@ -1,10 +1,10 @@
 ## initialize parameters
 t      <- seq(0,5,0.1)
-v0     <- 50
+v0     <- 30
 y0     <- 0
 theta0 <- 30
 b      <- 0.5
-m      <- 5
+m      <- 0.5
 
 ## We will assume the truth to be the projectile motion as initialized
 ## by the values above

@@ -1,4 +1,4 @@
-example_1 <- function(t = seq(0,5,0.1), y0= 10, v0 = 50, theta0 = 30, b = 0.9,  m = 5, legend=TRUE){
+example_1 <- function(t = seq(0,50,0.1), y0= 10, v0 = 500, theta0 = 30, b = 0.9,  m = 5, legend=TRUE){
         ## get projectile parameters for vacuum and air friction cases
         vacuum   <- projectile(t = t, y0 = y0,  v0 = v0, theta0 = theta0)
         friction <- projFrictoinLin(t = t, y0 = y0, v0 = v0, theta0 = theta0, b = b, m = m)
