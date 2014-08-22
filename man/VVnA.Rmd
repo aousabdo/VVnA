@@ -18,6 +18,38 @@ opts_chunk$set(eval=TRUE, tidy=TRUE, tidy.opts=list(width.cutoff=10))
 The VVnA "Validation, Verification, and Accreditation" package is a package intended 
 for ....
 
+# Air Resistance
+Air resistance is a friction force resulting from different atmoic phenomena and depends on the velocity of the projectile relative to air. For most objects, the direction of  the force is always opposite to the main velocity vector.  
+
+## Air Resistance at Low Speeds
+At low speeds, the force of friction with air can be approximated as a summation 
+of linear an duadratic terms:  
+$$
+\begin{aligned}
+f(v) & = f_{lin} + f_{quad} \\
+& = bv + cv^2
+\end{aligned}
+$$
+
+For a spherical object of diametere $D$, the coefficients of friction are: 
+
+$$
+\begin{aligned}
+b & = \beta D \\
+c & = \gamma D^2
+\end{aligned}
+$$
+Where 
+$$
+\begin{aligned}
+\beta &  = 1.6 \times 10^{-4} \, N.s/m^2 \\
+\gamma & = 0.25 \, N.s/m^4
+\end{aligned}
+$$
+
+For more details on the derivation of the equations used in this package please 
+see this [document](http://rhig.physics.wayne.edu/~pruneau/Courses/PHY5200/lectures/PHY5200-Chap2.pdf)
+
 # Functions
 ## Projectile Motion
 Projectile motion in vacuum and in air are calculated with the `projectile` and `projFrictionLin` functions respectively. when considering air friction effects on projectiles, we only consider the viscous drag which is related to the 
@@ -167,7 +199,19 @@ hist(jit(x=1, n=1000, method="uniform", amount = 1), main="Uniform Dist.", xlab=
 ```
 
 # Simulations
-A detailed example of generating simulations can be found in `example_2.r` in the `example` directory. An output of this exmaple is shown below:
+
+## Simulation Parameters:
+1. $\theta$: Angle with respect to the vertical direction. 
+2. $\phi$: Lateral angle, angle with respect to the horizontal direction.
+3. $t$: Time of firing.
+
+We will be simulating the following uncertainities:
+
+1. $\delta\theta$: Uncertainity in $\theta$
+2. $\delta\phi$: Uncertainity in $\phi$
+3. $\delta t$: Uncertainity in firing time $t$
+
+A detailed example of generating simulations can be found in `example_2` in the `example` directory. An output of this exmaple is shown below:
 
 ```{r, echo=FALSE}
 ## initialize parameters
@@ -210,11 +254,11 @@ makePlot <- function(simList=NULL, par=2, N){
         ## function to plot projectile parameter as a function to time
         if(par==1){
                 parplot="x"
-                yLab = "Horizontal Displacement (m)"
+                yLab = "Horizontal Disp. (m)"
         }
         else if(par==2){
                 parplot="y"
-                yLab="Vertical Displacement (m)"
+                yLab="Vertical Disp. (m)"
         }
         if(par==3){
                 parplot="vx"
