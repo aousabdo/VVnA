@@ -1,26 +1,26 @@
 ## initialize parameters
 t      <- seq(0,5,0.1)
-v0     <- 30
+v0     <- 50
 y0     <- 0
 theta0 <- 30
 b      <- 0.5
-m      <- 0.5
+m      <- 5
 
 ## We will assume the truth to be the projectile motion as initialized
 ## by the values above
 set.seed(pi)
 truth <- projFrictoinLin(t = t, y0 = y0, v0 = v0, theta0 = theta0, b = b, m = m)
 
-## Simulate n number of runs while slightley changing each input parameter
+## Simulate n number of runs while slightley changing y0, v0, and theta0
 Sim <- function(t = seq(0,5,0.1), y0 = 0, v0 = 50, theta0 = 30, b = 0.5, m = 5, 
                 n = 5, amount=1, seed=NULL){
         #function to simulate projectile motion
         set.seed(seed)
-        df <- data.frame(y0=jit(y0,n, amount), 
+        df <- data.frame(y0=jit(y0,n, 0), 
                          v0=jit(v0,n, amount), 
                          theta0=jit(theta0,n, amount),
-                         b = jit(b,n, amount),
-                         m=jit(m,n, amount))       
+                         b = b,
+                         m = m)       
         ## List of projectile data for MC runs
         MC <- list()     
         for(i in 1:n){
@@ -38,11 +38,11 @@ makePlot <- function(simList=NULL, par=2, N){
         ## function to plot projectile parameter as a function to time
         if(par==1){
                 parplot="x"
-                yLab = "Horizontal Displacement (m)"
+                yLab = "Horizontal Disp. (m)"
         }
         else if(par==2){
                 parplot="y"
-                yLab="Vertical Displacement (m)"
+                yLab="Vertical Disp. (m)"
         }
         if(par==3){
                 parplot="vx"
